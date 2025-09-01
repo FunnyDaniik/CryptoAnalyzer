@@ -1,8 +1,6 @@
 package com.javarush.timoshenko.exception;
 
-/**
- * Базовое исключение для приложения шифра Цезаря
- */
+
 public class CipherException extends Exception {
 
     public CipherException(String message) {

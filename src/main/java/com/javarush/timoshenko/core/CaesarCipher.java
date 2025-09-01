@@ -46,7 +46,7 @@ public class CaesarCipher {
                 int newIndex = (index + shift) % alphabet.length;
                 char encryptedChar = alphabet[newIndex];
 
-                // Сохраняем регистр оригинального символа
+
                 if (Character.isUpperCase(character)) {
                     encryptedChar = Character.toUpperCase(encryptedChar);
                 }

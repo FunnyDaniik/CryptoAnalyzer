@@ -12,7 +12,7 @@ public class StatisticalAnalyzer {
         double bestScore = 0;
         char[] alphabet = cipher.getAlphabet();
 
-        // Частоты символов в representative тексте
+
         int[] refFrequencies = calculateCharacterFrequency(representativeText, alphabet);
 
         for (int shift = 0; shift < alphabet.length; shift++) {
@@ -44,7 +44,7 @@ public class StatisticalAnalyzer {
             }
         }
 
-        // Нормализуем частоты
+
         if (total > 0) {
             for (int i = 0; i < frequency.length; i++) {
                 frequency[i] = (frequency[i] * 1000) / total;

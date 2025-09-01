@@ -12,7 +12,7 @@ public class BruteForce {
         double bestMatch = 0;
         char[] alphabet = cipher.getAlphabet();
 
-        // Перебираем все возможные ключи
+
         for (int key = 0; key < alphabet.length; key++) {
             String decrypted = cipher.decrypt(encryptedText, key);
             double matchScore = calculateMatchScore(decrypted, sampleText);
@@ -28,11 +28,11 @@ public class BruteForce {
 
     private double calculateMatchScore(String text, String sampleText) {
         if (sampleText == null || sampleText.isEmpty()) {
-            // Если нет образца, используем частоту букв выбранного алфавита
+
             return calculateLetterFrequency(text);
         }
 
-        // Считаем частоту символов в образце и сравниваем
+
         return calculateFrequencySimilarity(text, sampleText);
     }
 
@@ -40,12 +40,11 @@ public class BruteForce {
         char[] alphabet = cipher.getAlphabet();
         boolean isRussian = alphabet == CaesarCipher.RUSSIAN_ALPHABET;
 
-        // Частоты букв ТОЛЬКО для буквенных частей алфавитов
+
         double[] expectedFrequencies;
-        int letterCount; // Количество букв в алфавите
+        int letterCount;
 
         if (isRussian) {
-            // Русские частоты (для 32 букв)
             expectedFrequencies = new double[]{
                     0.0801, 0.0159, 0.0454, 0.0170, 0.0298, 0.0845, 0.0094, 0.0165, 0.0735,
                     0.0121, 0.0349, 0.0440, 0.0321, 0.0670, 0.1097, 0.0281, 0.0473, 0.0547,
@@ -54,7 +53,6 @@ public class BruteForce {
             };
             letterCount = 32;
         } else {
-            // Английские частоты (для 26 букв)
             expectedFrequencies = new double[]{
                     0.0812, 0.0149, 0.0271, 0.0432, 0.1202, 0.0230, 0.0203, 0.0592, 0.0731,
                     0.0010, 0.0069, 0.0398, 0.0261, 0.0695, 0.0768, 0.0182, 0.0011, 0.0602,
@@ -66,9 +64,8 @@ public class BruteForce {
         int[] actualCounts = new int[letterCount];
         int totalLetters = 0;
 
-        // Считаем ТОЛЬКО буквы в тексте (первые letterCount символов алфавита)
         for (char c : text.toLowerCase().toCharArray()) {
-            for (int i = 0; i < letterCount; i++) { // Цикл только по буквам
+            for (int i = 0; i < letterCount; i++) {
                 if (c == alphabet[i]) {
                     actualCounts[i]++;
                     totalLetters++;
